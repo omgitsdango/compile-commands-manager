@@ -72,15 +72,14 @@ function M.add_define(define)
             command = "gcc -D" .. define .. " " .. vim.fn.fnamemodify(current_file, ":t"),
             file = current_file,
             arguments = { "gcc", "-D" .. define, vim.fn.fnamemodify(current_file, ":t") }
-        }
-        table.insert(compile_commands, new_entry)
+        }        table.insert(compile_commands, new_entry)
         print("Created new entry with define '" .. define .. "' for " .. vim.fn.fnamemodify(current_file, ":t"))
     end
 
     -- Write the updated compile_commands back to the file
     file = io.open(file_path, "w")
     if file then
-        file:write(vim.fn.json_encode(compile_commands, { indent = true }))
+        file:write(vim.fn.json_encode(compile_commands))
         file:close()
     else
         print("Could not open compile_commands.json for writing.")
@@ -127,14 +126,13 @@ function M.remove_define(define)
             print("Define '" .. define .. "' not found in entry for " .. vim.fn.fnamemodify(current_file, ":t"))
         end
     else
-        print("No entry found for current file: " .. vim.fn.fnamemodify(current_file, ":t"))
-        return
+        print("No entry found for current file: " .. vim.fn.fnamemodify(current_file, ":t"))        return
     end
 
     -- Write the updated compile_commands back to the file
     file = io.open(file_path, "w")
     if file then
-        file:write(vim.fn.json_encode(compile_commands, { indent = true }))
+        file:write(vim.fn.json_encode(compile_commands))
         file:close()
     else
         print("Could not open compile_commands.json for writing.")
