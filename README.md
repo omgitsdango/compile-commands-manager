@@ -1,7 +1,7 @@
-# compile-commands-manager.nvim
+# compile-commands-manager
 
 ## Overview
-`compile-commands-manager.nvim` is a Neovim plugin designed to help developers manage their `compile_commands.json` file efficiently. This plugin allows users to add or modify compilation commands directly from within Neovim, ensuring that all necessary defines are included for proper code highlighting and completion.
+`compile-commands-manager` is a Neovim plugin designed to help developers manage their `compile_commands.json` file efficiently. This plugin allows users to add or modify compilation commands directly from within Neovim, ensuring that all necessary defines are included for proper code highlighting and completion.
 
 ## Features
 - Intelligently add or modify entries in the `compile_commands.json` file.
@@ -17,7 +17,7 @@ To install the plugin, you can use your preferred plugin manager. For example, i
 
 ```lua
 require('lazy').setup({
-    'yourusername/compile-commands-manager.nvim'
+    'omgitsdango/compile-commands-manager'
 })
 ```
 
