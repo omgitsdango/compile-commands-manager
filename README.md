@@ -36,8 +36,25 @@ require('compile-commands-manager').setup({
 ```
 
 ### Key Mappings
-- `<leader>cca` - Prompts to add a define (`:AddDefine `)
-- `<leader>ccr` - Prompts to remove a define (`:RemoveDefine `)
+
+#### Cursor-based workflow (recommended):
+- `<leader>cca` - Adds the word under cursor as a define
+- `<leader>ccr` - Removes the word under cursor as a define
+
+#### Prompt-based workflow:
+- `<leader>ccA` - Prompts to add a define (`:AddDefine `)
+- `<leader>ccR` - Prompts to remove a define (`:RemoveDefine `)
+
+### Workflow Examples
+
+**Cursor-based (recommended):**
+1. Place your cursor on any word (e.g., `DEBUG_MODE`)
+2. Press `<leader>cca` to add it as a define
+3. Press `<leader>ccr` to remove it as a define
+
+**Prompt-based:**
+1. Press `<leader>ccA` and type the define name
+2. Press `<leader>ccR` and type the define name to remove
 
 ## Configuration
 You can customize the behavior of the plugin by calling the setup function with options:

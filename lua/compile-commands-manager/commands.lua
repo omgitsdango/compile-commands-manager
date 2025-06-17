@@ -1,6 +1,24 @@
 local M = {}
 local config = require('compile-commands-manager.config')
 
+function M.add_define_cursor()
+    local define = vim.fn.expand("<cword>")
+    if define == "" then
+        print("No word under cursor")
+        return
+    end
+    M.add_define(define)
+end
+
+function M.remove_define_cursor()
+    local define = vim.fn.expand("<cword>")
+    if define == "" then
+        print("No word under cursor")
+        return
+    end
+    M.remove_define(define)
+end
+
 function M.add_define(define)
     local current_file = vim.fn.expand("%:p")  -- Get absolute path of current file
     local file_path = config.get_compile_commands_path() or "compile_commands.json"
