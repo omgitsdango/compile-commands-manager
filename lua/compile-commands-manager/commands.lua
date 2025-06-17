@@ -28,8 +28,23 @@ function M.add_define(define)
     local file = io.open(file_path, "r")
     if file then
         local content = file:read("*a")
-        compile_commands = vim.fn.json_decode(content)
         file:close()
+
+        -- Only try to decode if content is not empty
+        if content and content:match("%S") then
+            local success, result = pcall(vim.fn.json_decode, content)
+            if success then
+                compile_commands = result
+            else
+                print("Warning: Invalid JSON in " .. file_path .. ", starting with empty compile commands")
+                compile_commands = {}
+            end
+        else
+            print("Warning: Empty " .. file_path .. ", starting with empty compile commands")
+            compile_commands = {}
+        end
+    else
+        print("Note: " .. file_path .. " doesn't exist, will create new one")
     end
 
     -- Find existing entry for current file
@@ -95,8 +110,24 @@ function M.remove_define(define)
     local file = io.open(file_path, "r")
     if file then
         local content = file:read("*a")
-        compile_commands = vim.fn.json_decode(content)
         file:close()
+
+        -- Only try to decode if content is not empty
+        if content and content:match("%S") then
+            local success, result = pcall(vim.fn.json_decode, content)
+            if success then
+                compile_commands = result
+            else
+                print("Warning: Invalid JSON in " .. file_path .. ", cannot remove define")
+                return
+            end
+        else
+            print("Warning: Empty " .. file_path .. ", no defines to remove")
+            return
+        end
+    else
+        print("Error: " .. file_path .. " doesn't exist, no defines to remove")
+        return
     end
 
     -- Find and modify the entry for the current file only
